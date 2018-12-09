@@ -1,0 +1,75 @@
+testData: {
+                  time: 1544350369753,
+                  bigBed: [
+                    {
+                      num: 2,
+                      isPre: true,
+                      type: 1
+                    },
+                    {
+                      num: 3,
+                      isPre: true,
+                      type: 1
+                    },
+                    {
+                      num: 6,
+                      isPre: true,
+                      type: 1
+                    },{
+                      num: 9,
+                      isPre: true,
+                      type: 1
+                    },
+                    {
+                      num: 1,
+                      isPre: true,
+                      type: 1
+                    },
+                    {
+                      num: 0,
+                      isPre: true,
+                      type: 1
+                    },
+                    {
+                      num: 10,
+                      isPre: true,
+                      type: 1
+                    }
+                  ],
+                  double: [
+                    {
+                      num: 1,
+                      isPre: true,
+                      type: 2
+                    },
+                    {
+                      num: 2,
+                      isPre: true,
+                      type: 2
+                    },
+                    {
+                      num: 3,
+                      isPre: true,
+                      type: 2
+                    },{
+                      num: 4,
+                      isPre: true,
+                      type: 2
+                    },
+                    {
+                      num: 6,
+                      isPre: true,
+                      type: 2
+                    },
+                    {
+                      num: 0,
+                      isPre: true,
+                      type: 2
+                    },
+                    {
+                      num: 12,
+                      isPre: true,
+                      type: 2
+                    }
+                  ]
+                }

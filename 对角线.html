@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #box {
+            margin: 100px auto;
+            position: relative;
+            width: 50%;
+            height: 150px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        #line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 1px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="line"></div>
+</div>
+
+
+
+</body>
+<script>
+    let box = document.querySelector('#box')
+    let line = document.querySelector('#line')
+
+    function setLine() {
+        let boxHeight = box.offsetHeight;
+        let boxWidth = box.offsetWidth;
+        let hypotenuse = Math.sqrt(boxHeight*boxHeight + boxWidth*boxWidth) // 斜边
+        let rotate = Math.asin(boxHeight / hypotenuse)
+        let rotateDeg = rotate * (180/Math.PI)
+
+        line.style.width = hypotenuse + '100px'
+        line.style.transform = `translate(-50%, -50%) rotateZ(${rotateDeg}deg)`;
+    }
+
+    setLine()
+
+    window.onresize = function() {
+        setLine()
+    }
+
+
+</script>
+</html>
