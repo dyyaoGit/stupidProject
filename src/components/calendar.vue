@@ -1,389 +1,238 @@
 <template>
-    <div class="box">
-        <div class="title1">
-            <div class="right">xx-xx 至 xx-xx</div>
-            七日化房间管理
-        </div>
-        <div class="content" @click="handlebox">
-            <!-- 头部 -->
-            <ul class="title-ul clearfix">
-                <li class="first-li">
-                    <div class="line"></div>
-                    <div class="day">日期</div>
-                    <div class="home">房型</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期一</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期二</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期三</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期四</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期五</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期六</div>
-                </li>
-                <li>
-                    <div class="num">16</div>
-                    <div class="week">星期日</div>
-                </li>
-            </ul>
-            <!-- 身体  -->
-            <ul class="body-ul clearfix">
-                <li class="first-child">豪华大床房</li>
-                <li v-for="item in testData.bigBed" v-text="item.num">1</li>
-            </ul>
-            <ul class="body-ul body-ul2 clearfix">
-                <li class="first-child">双标签</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li class="no-order">暂不可订</li>
-                <li>7</li>
-            </ul>
-            <ul class="body-ul clearfix">
-                <li class="first-child long-item">豪华海景大床房</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-            </ul>
-            <ul class="body-ul body-ul2 clearfix">
-                <li class="first-child">豪华家庭房</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-            </ul>
-            <ul class="body-ul clearfix">
-                <li class="first-child">天字一号房</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li id="full">满</li>
-            </ul>
-        </div>
-
+  <div class="box">
+    <div class="house-title">
+        七日化房间管理
+        <span class="house-title-date">
+          2018-08-01
+        </span>
     </div>
+    <table class="main-table">
+
+      <tbody>
+        <tr class="first-row">
+          <td class="cell-spe" ref="speCell">
+            <div class="date-text">日期</div>
+            <div class="housetype-text">房型</div>
+            <i class="line" ref="line"></i>
+          </td>
+          <td v-for="item in 7">
+            <div class="cell-top">
+              16
+            </div>
+            <div class="cell-bottom cell-item">
+              星期一
+            </div>
+          </td>
+        </tr>
+        <tr class="row" v-for="item in 5">
+          <td class="row-title" >
+            豪华大床房
+          </td>
+          <td class="cell-item" v-for="item in 7">
+            2
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
 </template>
 
 <script>
-    export default {
-        name:'',
-        data(){
-            return{
-                centerDialogVisible: false,
-                isAdvance:true,
-                haveValue:true,
-                userData:{
-                    time:'2018-10-20',
-                    houseType:'豪华大床房'
-                },
-                testData: {
-                  time: 1544350369753,
-                  bigBed: [
-                    {
-                      num: 2,
-                      isPre: true,
-                      type: 1
-                    },
-                    {
-                      num: 3,
-                      isPre: true,
-                      type: 1
-                    },
-                    {
-                      num: 6,
-                      isPre: true,
-                      type: 1
-                    },{
-                      num: 9,
-                      isPre: true,
-                      type: 1
-                    },
-                    {
-                      num: 1,
-                      isPre: true,
-                      type: 1
-                    },
-                    {
-                      num: 0,
-                      isPre: true,
-                      type: 1
-                    },
-                    {
-                      num: 10,
-                      isPre: true,
-                      type: 1
-                    }
-                  ],
-                  double: [
-                    {
-                      num: 1,
-                      isPre: true,
-                      type: 2
-                    },
-                    {
-                      num: 2,
-                      isPre: true,
-                      type: 2
-                    },
-                    {
-                      num: 3,
-                      isPre: true,
-                      type: 2
-                    },{
-                      num: 4,
-                      isPre: true,
-                      type: 2
-                    },
-                    {
-                      num: 6,
-                      isPre: true,
-                      type: 2
-                    },
-                    {
-                      num: 0,
-                      isPre: true,
-                      type: 2
-                    },
-                    {
-                      num: 12,
-                      isPre: true,
-                      type: 2
-                    }
-                  ]
-                }
-            }
+  import dyDialog from './dy-dialog'
+
+  export default {
+    name: '',
+    components: {
+      dyDialog
+    },
+    data() {
+      return {
+        showDialog: false,
+        isAdvance: true,
+        haveValue: true,
+        userData: {
+          time: '2018-10-20',
+          houseType: '豪华大床房'
         },
-        methods:{
-            handlebox(){
-                 this.centerDialogVisible=true
+        testData: {
+          time: 1544350369753,
+          bigBed: [
+            {
+              num: 2,
+              isPre: true,
+              type: 1
             },
-            handleClose() {
-                this.centerDialogVisible=false
+            {
+              num: 3,
+              isPre: true,
+              type: 1
             },
-            handleBack(){
-                this.centerDialogVisible=false
+            {
+              num: 6,
+              isPre: true,
+              type: 1
+            }, {
+              num: 9,
+              isPre: true,
+              type: 1
+            },
+            {
+              num: 1,
+              isPre: true,
+              type: 1
+            },
+            {
+              num: 0,
+              isPre: true,
+              type: 1
+            },
+            {
+              num: 10,
+              isPre: true,
+              type: 1
             }
+          ],
+          double: [
+            {
+              num: 1,
+              isPre: true,
+              type: 2
+            },
+            {
+              num: 2,
+              isPre: true,
+              type: 2
+            },
+            {
+              num: 3,
+              isPre: true,
+              type: 2
+            }, {
+              num: 4,
+              isPre: true,
+              type: 2
+            },
+            {
+              num: 6,
+              isPre: true,
+              type: 2
+            },
+            {
+              num: 0,
+              isPre: true,
+              type: 2
+            },
+            {
+              num: 12,
+              isPre: true,
+              type: 2
+            }
+          ]
         }
+      }
+    },
+    methods: {
+      handlebox() {
+        this.showDialog = true
+      },
+      handleClose() {
+        this.centerDialogVisible = false
+      },
+      handleBack() {
+        this.centerDialogVisible = false
+      },
+      setLine () {
+          let box = this.$refs.speCell
+          let line = this.$refs.line
+
+          let boxHeight = box.offsetHeight;
+          let boxWidth = box.offsetWidth;
+          let hypotenuse = Math.sqrt(boxHeight*boxHeight + boxWidth*boxWidth) // 斜边
+          let rotate = Math.asin(boxHeight / hypotenuse)
+          let rotateDeg = rotate * (180/Math.PI)
+
+          line.style.width = hypotenuse + '100px'
+          line.style.transform = `translate(-50%, -50%) rotateZ(${rotateDeg}deg)`;
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        let vm = this;
+        this.setLine()
+        window.onresize = function () {
+          vm.setLine()
+        }
+      })
+    },
+    beforeDestroy () {
+      window.onresize = null
     }
+  }
 </script>
 
 <style scoped lang='scss'>
-// 大盒子
-.box{
-    // margin: 10px 0 0 20px;
-    width: 360px; // 宽度具体调整
-    // background: #f1f1f1;
-}
-// 头部标题
-.title1{
-    height: 42px;
-    line-height: 42px;
-    padding: 0 12px;
+  @import '../style/color';
+
+  .house-title {
+    padding: 4px 10px;
     color: #fff;
     font-size: 16px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background: url('../image/home/title.png') no-repeat;
+    font-weight: 700;
+    border-radius: 6px 6px 0 0;
+    line-height: 35px;
+    text-align: left;
+    background-image: url("../assets/image/home/title.png");
+    -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
-    .right{
-        float: right;
-        font-size: 14px;
+    background-repeat: no-repeat;
+
+    .house-title-date {
+      float: right;
+      font-size: 14px;
+      font-weight: 700;
     }
-}
-// 内容区
-.content{
-    border: 1px solid #caddfe;
-    border-top: none;
-}
-// 内容的标题
-.title-ul{
-    li{
-        float: left;
-        width: 38.251px;
-        height: 42px;
-    }
-    li:nth-child(2n){
-        background: #e1ecff;
-    }
-    li:nth-child(2n-1){
-        background: #eff5ff;
-    }
-    .first-li{
-        width: 90.22px;
-        position: relative;
-        color: #95a7fe;
-        font-size: 14px;
-        .line{
-            position: absolute;
-            top: 21px;
-            left: -5px;
-            height: 1px;
-            width: 100px;
-            background: #caddfe;
-            -webkit-transform: rotateZ(35deg);
-            transform: rotateZ(24deg);
-        }
-        .day{
-            position: absolute;
-            right: 16px;
-            top: 4px;
-        }
-        .home{
-            position: absolute;
-            left: 16px;
-            bottom: 4px;
-        }
-    }
-    .num{
-        height: 44px;
-        line-height: 44px;
-        text-align: center;
-        font-weight: 700;
-        font-size: 14px;
-    }
-    .week{
-        font-size: 12px;
-        text-align: center;
-    }
-}
-// 内容的身体 奇数行
-.body-ul {
-    height: 42px;
-    line-height: 42px;
+  }
+
+  .main-table {
+    width: 100%;
+    font-size: 12px;
     text-align: center;
-    color: #5c5c5c;
-    .first-child{
-        width: 90.22px;
+    border-collapse: collapse;
+    border: 1px solid $tb-border-cl;
+    border-top: none;
+
+    .cell-spe {
+      width: 20%;
+      position: relative;
+      background-color: #caddfe;
+
+      .date-text {
+        text-align: right;
+      }
+
+      .housetype-text {
         text-align: left;
-        padding: 0 10px;
-        box-sizing: border-box;
-        font-size: 14px;
+      }
     }
-    .long-item{
-        padding: 6px 12px 0 12px !important;
-        line-height: 1.2 !important;
-    }
-    li{
-        float: left;
-        width: 38.25px;
-        height: 42px;
-    }
-    li:nth-child(2n){
-        background: #eff5ff;
-    }
-    li:nth-child(2n-1){
-        background: #fff;
-    }
-}
 
-// 偶数行
-.body-ul2{
-    li:nth-child(2n){
-        background: #e1ecff;
+    td {
+      padding: 4px;
     }
-    li:nth-child(2n-1){
-        background: #eff5ff;
-    }
-}
-// 满房
-.full{
-    background: #fd7e92;
-    color: #fff;
-    font-size: 12px;
-}
-// 暂不可预订
-.no-order{
-    background: #b7b8ff;
-    color: #fff;
-    line-height: 1.2 !important;
-    padding: 6px 4px 0 !important;
-    box-sizing: border-box;
-    font-size: 12px;
-}
-.btns{
-        display: inline-block;
-        box-sizing: border-box;
-        cursor: pointer;
-        margin: 0 auto;
-        color:#fff;
-        width:40%;
-        height: 54px;
-        line-height: 40px;
-        border-radius: 20px;
-        font-weight: 550px;
-        text-align: center;
-        background: url('../image/home/btn2.png')no-repeat;
-        background-size: 100% 100%;
-}
-.contents{
-    height: 100px;
-    margin-top: 20px;
-    padding: 0 30px 0px 30px;
-    font-weight: 550;
-    line-height: 2;
-    color:#333;
-}
-.leftGoBack{
-    width: 90px;
-    height: 50px;
-    .imgleft{
-        cursor: pointer;
-        display: inline-block;
-        width: 50px;
-        height: 50px;
-        background: url('../image/home/leftArrow.png')no-repeat;
-        background-size: 100% 100%;
-    }
-}
-.carditem{ margin-bottom: 10px;}
-.title{ padding-left: 6px;border-left:3px solid #75b8fc;}
-.header{font-weight: 700;}
-.mr20{margin-right: 20px;}
-.mt5{margin-top: 5px;}
-.mt15{margin-top: 15px;}
-.mb15{margin-bottom: 15px;}
-.lh50{ line-height: 50px; }
-</style>
-<style  lang='scss'>
-.el-card{
-    margin-bottom: 10px;
-}
-.el-dialog--center{
-    color:#2b2b2b;
-   margin-top: 30vh !important;
-   background: url('../image/bigbox.png')no-repeat center;
-   background-size: 100% 101.5%;
-   background-position: 0 -5px;
-   .el-dialog__body{ height: 90px;  padding:40px 0 0 0; }
-   .el-dialog__footer{ height: 90px; }
-   .el-icon-close{  display: none;}
-}
 
+    .row-title {
+      font-size: 12px;
+    }
+
+    /*线*/
+    .line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      background: #000;
+      width: 500px;
+      height: 1px;
+    }
+  }
 </style>
