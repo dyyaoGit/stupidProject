@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <el-row :gutter="12">
-          
+
             <el-col :span="15">
                 <div class="grid-content bg-purple">
                     <div class="left">
@@ -9,11 +9,11 @@
                         <todaySummary/>
                         <!-- 待处理订单 -->
                             <pendingOrder/>
-                        <!-- 住客看板 -->                
+                        <!-- 住客看板 -->
                         <lodgerKB/>
                         <!-- 审核离店 -->
                         <auditLeave/>
-                    </div>  
+                    </div>
                 </div>
             </el-col>
               <el-col :span="9">
@@ -26,18 +26,18 @@
                             <calendar/>
                         </el-card>
                         <!-- 评价/回复 -->
-                        <userComment/>    
+                        <userComment/>
                     </div>
                 </div>
             </el-col>
         </el-row>
-      
-        
+
+
     </div>
 </template>
 
 <script>
-import calendar from '@/components/calendar.vue'
+import calendar from '@/components/calendar/index.vue'
 import todaySummary from '@/components/todaySummary.vue'
 import pendingOrder from '@/components/pendingOrder.vue'
 import lodgerKB from '@/components/lodgerKB.vue'
@@ -56,11 +56,11 @@ import userComment from '@/components/userComment.vue'
         },
         data(){
             return{
-               
+
             }
         },
         methods:{
-           
+
         },
         created(){
         }
@@ -71,10 +71,10 @@ import userComment from '@/components/userComment.vue'
 <style scoped lang='scss'>
 .home{
     .right{
-        .subtitle{ color:#409eff;margin-bottom: 10px;}      
+        .subtitle{ color:#409eff;margin-bottom: 10px;}
     }
     .left{
-        
+
     }
 }
 </style>

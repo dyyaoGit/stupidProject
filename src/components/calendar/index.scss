@@ -1,0 +1,118 @@
+@import '../../style/color';
+
+.house-title {
+  min-width: 400px;
+  box-sizing: border-box;
+  padding: 4px 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 6px 6px 0 0;
+  line-height: 35px;
+  text-align: left;
+  background-image: url("../../assets/image/home/title.png");
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  .house-title-date {
+    float: right;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.main-table {
+  min-width: 400px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #caddfe;
+  border-top: none;
+
+  /*头部单元格*/
+  .cell-item {
+    padding: 10px 0;
+  }
+  .cell-item:nth-child(2n), .item-num:nth-child(2n) {
+    background: #e1e7ff;
+  }
+
+  .cell-item:nth-child(2n+1) {
+    background: #eff5ff;
+  }
+
+  .item-num:nth-child(2n+1) {
+    //background: #fff;
+  }
+
+  .cell-top {
+    margin: 5px 0;
+    font-weight: 700;
+  }
+
+  .cell-bottom {
+    font-weight: 600;
+    margin: 5px 0;
+  }
+  /*单元格*/
+
+  .row:nth-child(2n)>td:nth-child(2n) {
+    background: #eff5ff;
+  }
+  .row:nth-child(2n+1)>td:nth-child(2n+1) {
+    background: #e1ecff;
+  }
+
+  /*房源类型*/
+  .row-title {
+    font-weight: 600;
+  }
+
+
+  td {
+    font-size: 14px;
+    text-align: center;
+    padding: 14px 0;
+  }
+
+  /*斜线大单元格*/
+
+  .cell-spe {
+    width: 20%;
+    position: relative;
+    font-size: 14px;
+    color: #95a7fe;
+    background-color: #eff5ff;
+
+    .date-text {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+
+    .housetype-text {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+    }
+  }
+
+
+
+  .row-title {
+    font-size: 12px;
+  }
+
+  /*线*/
+  .line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    background: #caddfe;
+    width: 500px;
+    height: 1px;
+  }
+}
