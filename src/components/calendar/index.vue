@@ -17,10 +17,10 @@
           </td>
           <td v-for="(item, index) in dateData.weekDate" class="cell-item">
             <div class="cell-top">
-              {{item}}
+              {{item.num}}
             </div>
             <div class="cell-bottom">
-              {{week[index]}}
+              {{item.day}}
             </div>
           </td>
         </tr>
@@ -57,12 +57,13 @@
         },
         dateData: {
           formatTime: '', // 格式化好的日期
-          month: '', // 当前月份
+          startMonth: '', // 当前月份
+          endMonth: '',  // 结束月份
           weekDate: [] // 一星期的数组
         },
-        week: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日',],
+        week: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
         testData: {
-          time: 1544629397, // unix时间戳
+          time: 1544683731, // unix时间戳
           bigBed: [
             {
               num: 2,
@@ -134,7 +135,9 @@
               isPre: true,
               type: 2
             }
-          ]
+          ],
+
+
         },
         hoseType: ['豪华大床房', '双标间', '豪华海景大床房', '豪华家庭房', '天字一号房']
       }
@@ -166,31 +169,44 @@
       getDate () {
         let unix = this.testData.time //unix 时间戳
         let minDate = new Date(unix*1000) // /用unix时间戳得到时间对象
-        let today = minDate.getDay() // 获取星期几
-        let todayNum = minDate.getDate() // 今天是多少号
-        let firstDay = -1; // 这一周开始的第一天
-        if(today == 0) { // 如果是星期天
-          let preDay = todayNum - 6;
-          minDate.setDate(preDay)
-          firstDay = minDate.getDate(); // 赋值第一天
-          this.dateData.weekDate = []
-          for(let i = 0; i<7; i++) {
-            this.dateData.weekDate.push(firstDay + i)
-          }
+        let startMonth = minDate.getMonth() + 1 // 今天是几月
+        let endMonth = ''
 
-        } else { // 如果不是星期天
-          let preDay = todayNum - today + 1; // 得到这周开始的号数
-          minDate.setDate(preDay) // 设置这周开始的号数
-          // console.log(minDate.getDate()); //得到了计算好的这周开始的号数
-          firstDay = minDate.getDate(); // 赋值第一天
-          console.log(firstDay);
-          this.dateData.weekDate = []
-          for(let i = 0; i<7; i++) {
-            this.dateData.weekDate.push(firstDay + i)
+        this.dateData.weekDate = [];
+        for(let i = 0; i < 7; i++){ // 获得七天的号数和星期几
+          this.dateData.weekDate.push({
+            day: this.week[minDate.getDay()], // 得到星期几
+            num: minDate.getDate() // 得到第几号
+          })
+          if(i == 6){ // 得到最后一天的月份
+            endMonth = minDate.getMonth() + 1
+            break;
           }
+          minDate.setDate(minDate.getDate() + 1) // 递增操作
         }
 
+        this.dateData.formatTime = `${startMonth}-${this.dateData.weekDate[0].num}至${endMonth}-${this.dateData.weekDate[6].num}`
 
+        // if(today == 0) { // 如果是星期天
+        //   let preDay = todayNum - 6;
+        //   minDate.setDate(preDay)
+        //   firstDay = minDate.getDate(); // 赋值第一天
+        //   this.dateData.weekDate = []
+        //   for(let i = 0; i<7; i++) {
+        //     this.dateData.weekDate.push(firstDay + i)
+        //   }
+        //
+        // } else { // 如果不是星期天
+        //   let preDay = todayNum - today + 1; // 得到这周开始的号数
+        //   minDate.setDate(preDay) // 设置这周开始的号数
+        //   // console.log(minDate.getDate()); //得到了计算好的这周开始的号数
+        //   firstDay = minDate.getDate(); // 赋值第一天
+        //   console.log(firstDay);
+        //   this.dateData.weekDate = []
+        //   for(let i = 0; i<7; i++) {
+        //     this.dateData.weekDate.push(firstDay + i)
+        //   }
+        // }
       }
     },
     mounted() {
