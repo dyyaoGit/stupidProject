@@ -62,7 +62,7 @@
         <el-date-picker v-model="selectData.inDate" type="date" class="mr10" placeholder="入住日期"></el-date-picker>
         <el-date-picker v-model="selectData.goDate" type="date" class="mr10" placeholder="离店日期"></el-date-picker>
       </div>
-      <div class="userItem" v-for="(item,index) in 4" :key="index" :model="userData">
+      <div class="userItem" v-for="(item,index) in 1" :key="index" :model="userData">
         <el-row>
           <el-col :span="4">
             <div class="grid-content bg-purple">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="commont fs14 mb10">{{userData.common}}</div>
                     <div class="houseType fs14 c2 mb10">{{userData.houseType}}</div>
-                    
+
                      <!-- 回复逻辑 -->
                     <div class="adminAsk" v-if="userData.adminAsk">
                       <el-row :gutter="20">
@@ -105,27 +105,27 @@
                           </div>
                         </el-col>
                       </el-row>
-                        
+
                     </div>
-                    <div class="box-Reply clearfix"  ref="huifubox"  v-else-if="isShow">                    
+                    <div class="box-Reply clearfix"  ref="huifubox"  v-else-if="isShow">
                         <textarea :value='userData.adminAsk' name="adminAsk" class="reply" id="reply" cols="42" rows="5">
                         </textarea>
-                        <el-button @click="handleNo(index)" class="flr">取消</el-button>  
+                        <el-button @click="handleNo(index)" class="flr">取消</el-button>
                         <el-button @click="handleYes" type='primary flr mr10'>回复</el-button>
-                        
+
                     </div>
-                    <div class="box-Reply clearfix"  ref="huifubox"  v-else-if="isEdit">                    
+                    <div class="box-Reply clearfix"  ref="huifubox"  v-else-if="isEdit">
                         <textarea :value='userData.adminAsk' name="adminAsk" class="reply" id="reply" cols="42" rows="5">
                         </textarea>
-                        <el-button @click="handleNo1(index)" class="flr">取消</el-button>  
+                        <el-button @click="handleNo1(index)" class="flr">取消</el-button>
                         <el-button @click="handleYes1" type='primary flr mr10'>回复</el-button>
-                        
+
                     </div>
                     <el-button  v-else class="flr" type='primary' @click="handleReply(index)">
                         回复
-                    </el-button>    
+                    </el-button>
                 </div>
-                
+
             </div>
           </el-col>
         </el-row>
@@ -147,7 +147,7 @@ export default {
       userData: {
         username: "小强",
         adminAsk:'你的满意就是我们最大的动力',
-        // 
+        //
         common:'今天天气不错，就是有点冷，对的就是冷~~~~，卡卡啦啦啦',
         houseType:'豪华大床房',
         evaluationTime: "2018-11-22",
@@ -158,22 +158,22 @@ export default {
         {
           title: "服务",
           stars: 2,
-         
+
         },
         {
           title: "卫生",
           stars: 3,
-         
+
         },
         {
           title: "环境",
           stars: 4,
-        
+
         },
         {
           title: "配置",
           stars: 5,
-         
+
         }
       ],
       selectData: {
@@ -210,7 +210,7 @@ export default {
           this.$message.success('删除成功!')
         }).catch(() => {
           this.$message.info('已取消删除')
-        })      
+        })
     },
     handleYes1(){
 
@@ -229,13 +229,13 @@ export default {
               // this.isShow = true
           },
     handleYes(){
-        
+
     },
     handleNo(index){
         this.isShow = false
         this.$refs.huifubox[index].style.display = 'none'
     },
-    
+
   }
 };
 </script>
@@ -372,7 +372,7 @@ export default {
     }
   }
   /deep/ .el-input--prefix .el-input__inner {background: #fff;}
-  /deep/ .el-button{ border-radius: 20px; border: 1px solid #409eff; width: 100px; 
+  /deep/ .el-button{ border-radius: 20px; border: 1px solid #409eff; width: 100px;
                        height: 32px; line-height: 8px;}
   .userItem {
     padding: 10px 0px;
