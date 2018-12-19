@@ -15,7 +15,8 @@
   background: -o-linear-gradient(left,#6b40fc 10%,#416ffc 20%,#a8a6ff);
   background: -moz-linear-gradient(left,#6b40fc 10%,#416ffc 20%,#a8a6ff);
   background: linear-gradient(left,#6b40fc 10%,#416ffc 20%,#a8a6ff);
-  background-repeat: no-repeat;
+  background: -ms-linear-gradient(left,#6b40fc 10%,#416ffc 20%,#a8a6ff);
+
 
   .center-wrap {
     height: 60px;
