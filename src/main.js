@@ -10,6 +10,7 @@ import {$axios} from './utils/index.js'
 import VueCookies from 'vue-cookies'
 // import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css';
+import 'iview/dist/styles/iview.css'
 // import iView from 'iview';
 // import 'iview/dist/styles/iview.css';
 

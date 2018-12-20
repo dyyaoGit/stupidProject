@@ -1,5 +1,9 @@
 @import '../../style/color';
 
+.main-wrap {
+  max-width: 1100px;
+}
+
 .house-title {
   position: relative;
   min-width: 400px;
@@ -17,12 +21,63 @@
   background: linear-gradient(left,#6b40fc 10%,#416ffc 20%,#a8a6ff);
   background: -ms-linear-gradient(left,#6b40fc 10%,#416ffc 20%,#a8a6ff);
 
-
   .center-wrap {
+    position: relative;
     height: 60px;
-    width: 400px;
-    //background: rgb(255, 0, 0);
-    margin: 0px auto;
+    width: 550px;
+    margin: 0 auto;
+    line-height: 1;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    color: #333;
+
+    /deep/ .ivu-input { // 修改iview 默认样式
+      border-radius: 16px;
+      text-align: center;
+      color: #4579fc;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /deep/ .ivu-input-icon-normal+.ivu-input { // 字体居中
+      padding: 0 25px;
+    }
+
+    /deep/ .ivu-input-icon { // 去除iview输入框icon
+      display: none;
+    }
+
+    .btn-default {
+      position: absolute;
+      top: 0;
+      height: 60px;
+      line-height: 60px;
+      cursor: not-allowed;
+      user-select: none;
+      color: #e0e0e0;
+    }
+    .btn-left {
+      left: 0;
+      padding-left: 40px;
+    }
+    .btn-right {
+      right: 0;
+      padding-right: 40px;
+    }
+    .active {
+      cursor: pointer;
+      color: #fff;
+    }
+    .icon-btn {
+      font-weight: 700;
+    }
+
+    .dy-datepicker {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .house-title-date {
@@ -100,6 +155,7 @@
 
 
   td {
+    cursor: pointer;
     max-height: 100px;
     font-size: 14px;
     text-align: center;

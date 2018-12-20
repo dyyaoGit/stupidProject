@@ -1,59 +1,70 @@
 <template>
   <div class="box">
-    <div class="house-title" >
-      <!--<span class="house-title-date">-->
-          <!--{{dateData.formatTime}}-->
-        <!--</span>-->
-      <div class="center-wrap" style="height: 60px;width: 300px;background: #f00;margin: 0 auto;">
-
+    <div class="main-wrap">
+      <div class="house-title" >
+        <div class="center-wrap" style="">
+        <span class="btn-default btn-left" @click="handleClickPrev(-15)" :class="{active: btnLeftActive}">
+          <i class="el-icon-arrow-left icon-btn"></i>
+          前15天
+        </span>
+          <span class="btn-default btn-right active" @click="handleClickNext(15)">
+          后15天
+          <i class="el-icon-arrow-right icon-btn"></i>
+        </span>
+          <date-picker
+            class="dy-datepicker"
+            type="date"
+            v-model="currentDate"
+            :options="pickerOptions"
+            @on-change="pickerChange"
+            placeholder="请选择想查看的日期" />
+        </div>
       </div>
-    </div>
-    <table class="main-table" @click="handleClick">
+      <table class="main-table" @click="handleClick">
 
-      <tbody>
-      <tr class="first-row">
-        <td class="cell-spe" ref="speCell">
-          <div class="date-text">日期</div>
-          <div class="housetype-text">房型</div>
-          <i class="line" ref="line"></i>
-        </td>
-        <td v-for="(item, index) in dateData.weekDate" class="cell-item">
-          <div class="cell-top">
-            {{item.num}}
-          </div>
-          <div class="cell-bottom">
-            {{item.day}}
-          </div>
-        </td>
-      </tr>
-      <tr class="row" v-for="(item,idx) in houseData.arr" v-if="houseData">
-        <td class="row-title" >
-          {{item.typeName}}
-        </td>
-        <td class="item-num" v-for="(it,index) in item.arr" :class="getClass(it)" :data-row="idx" :data-col="index">
+        <tbody>
+        <tr class="first-row">
+          <td class="cell-spe" ref="speCell">
+            <div class="date-text">日期</div>
+            <div class="housetype-text">房型</div>
+            <i class="line" ref="line"></i>
+          </td>
+          <td v-for="(item, index) in dateData.weekDate" class="cell-item">
+            <div class="cell-top">
+              {{item.num}}
+            </div>
+            <div class="cell-bottom">
+              {{item.day}}
+            </div>
+          </td>
+        </tr>
+        <tr class="row" v-for="(item,idx) in houseData.arr" v-if="houseData">
+          <td class="row-title" >
+            {{item.typeName}}
+          </td>
+          <td class="item-num" v-for="(it,index) in item.arr" :class="getClass(it)" :data-row="idx" :data-col="index">
           <span class="item-num-inner" v-if="it.isPre" :data-row="idx" :data-col="index">
               {{it.surplus==0?'满': it.surplus}}
           </span>
-          <div v-else :data-row="idx" :data-col="index">
-            <div :data-row="idx" :data-col="index">
-              暂不
+            <div v-else :data-row="idx" :data-col="index">
+              <div :data-row="idx" :data-col="index">
+                暂不
+              </div>
+              <div :data-row="idx" :data-col="index">
+                可订
+              </div>
             </div>
-            <div :data-row="idx" :data-col="index">
-              可订
-            </div>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   import {DatePicker} from 'iview'
-  import 'iview/dist/styles/iview.css'
-
 
   export default {
     name: '',
@@ -63,6 +74,14 @@
     },
     data() {
       return {
+        pickerOptions: { // 日期选择器选项
+          disabledDate (date) { // 禁用的日期 返回真值禁用
+            return date && date.valueOf() < Date.now() - 86400000;
+          }
+        },
+        btnLeftActive: false,
+        currentDate: new Date(), // 当前选择的日期
+        date: new Date(), // 今天的日期
         showDialog: false,
         isAdvance: true,
         haveValue: true,
@@ -99,15 +118,58 @@
           }
         }
       },
+      pickerChange (date) {
+        let newDate = new Date(date)
+        /*用户选择日期的逻辑在这里写*/
+        /*用户选择日期的逻辑在这里写*/
+        /*用户选择日期的逻辑在这里写*/
+        /*用户选择日期的逻辑在这里写*/
+      },
+      handleClickNext (num) {
+        let oldDate = this.currentDate.getDate()
+        let newDate = this.currentDate.setDate(oldDate + num)
+        this.currentDate = new Date(newDate)
+        if (newDate - this.date.getTime() >= 15 * 86400000) { // 大于15天
+          this.btnLeftActive = true
+        } else {
+          this.btnLeftActive = false
+        }
+
+        /*用户点击后十五天的逻辑在这里写*/
+        /*用户点击后十五天的逻辑在这里写*/
+        /*用户点击后十五天的逻辑在这里写*/
+        /*用户点击后十五天的逻辑在这里写*/
+      },
+      handleClickPrev (num) {
+        if (this.btnLeftActive) {
+          let oldDate = this.currentDate.getDate()
+          let newDate = this.currentDate.setDate(oldDate + num)
+          this.currentDate = new Date(newDate)
+          if (newDate - this.date.getTime() >= 15 * 86400000) { // 大于15天
+            this.btnLeftActive = true
+          } else {
+            this.btnLeftActive = false
+          }
+
+          /*用户点击前十五天的逻辑在这里写*/
+          /*用户点击前十五天的逻辑在这里写*/
+          /*用户点击前十五天的逻辑在这里写*/
+          /*用户点击前十五天的逻辑在这里写*/
+          /*用户点击前十五天的逻辑在这里写*/
+        }
+      },
       handleClick(e) {
         let target = e.target.dataset.col && e.target.dataset.row && e.target;
         if(target) {
           console.log(target.dataset.col + '列');
-          console.log(target.dataset.row + '行')
+          console.log(target.dataset.row + '行');
+          // 单元格点击事件在这里写
+          // 单元格点击事件在这里写
+          // 单元格点击事件在这里写
+          // 单元格点击事件在这里写
+          // 单元格点击事件在这里写
+          // 单元格点击事件在这里写
         }
-      },
-      handleClose() {
-        this.centerDialogVisible = false
       },
       setLine () { //斜线设置
         let box = this.$refs.speCell;
@@ -154,29 +216,6 @@
         this.$nextTick(() => {
           this.setLine()
         })
-
-
-        // if(today == 0) { // 如果是星期天
-        //   let preDay = todayNum - 6;
-        //   minDate.setDate(preDay)
-        //   firstDay = minDate.getDate(); // 赋值第一天
-        //   this.dateData.weekDate = []
-        //   for(let i = 0; i<7; i++) {
-        //     this.dateData.weekDate.push(firstDay + i)
-        //   }
-        //
-        // } else { // 如果不是星期天
-        //   let preDay = todayNum - today + 1; // 得到这周开始的号数
-        //   minDate.setDate(preDay) // 设置这周开始的号数
-        //   // console.log(minDate.getDate()); //得到了计算好的这周开始的号数
-        //   firstDay = minDate.getDate(); // 赋值第一天
-        //   console.log(firstDay);
-        //   this.dateData.weekDate = []
-        //   for(let i = 0; i<7; i++) {
-        //     this.dateData.weekDate.push(firstDay + i)
-        //   }
-        // }
-
       }
     },
     mounted() {
@@ -187,7 +226,6 @@
           vm.setLine()
         }
       });
-      // this.getDate()
       this.getData()
     },
     beforeDestroy () {
