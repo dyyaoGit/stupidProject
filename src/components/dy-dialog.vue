@@ -3,21 +3,21 @@
     :visible.sync="currentValue"
     width="30%"
     center>
-    <div class="contents  mb15" v-if="options">
+    <div class="contents mb15" v-if="options">
       <p class="mb5 fw">
-        <span>{{options.time}}</span>
+        <span>{{formatTime}}</span>
         <span>{{options.houseType}}</span>
       </p>
-      <p class="clearfix">
+      <div class="clearfix" style="height: 100px;">
         <el-switch
           class="flr mt5"
-          v-model="isOpen"
+          @change="handleChange"
+          v-model="currentIspre"
           active-text="开启"
           inactive-text="关闭">
         </el-switch>
         <span class="fll">房间网订渠道</span>
-
-      </p>
+      </div>
     </div>
     <div slot="footer" class="dialog-footer clearfix">
       <div class="btns fs14 flr" @click="close">确 定</div>
@@ -41,17 +41,31 @@
       },
       options: {
         type: Object
+      },
+      isPre: {
+        type: Boolean
+      },
+      formatTime: {
+        type: String
       }
     },
     data () {
       return {
         currentValue: this.value,
-        isOpen: false
+        isOpen: false,
+        currentIspre: this.options&&this.options.isPre
       }
     },
     methods: {
       close () {
         this.currentValue = false
+      },
+      handleChange () {
+        this.$emit('changeIsPre', {
+          col: this.options.col,
+          row: this.options.row,
+          value: this.currentIspre
+        })
       }
     },
     watch: {
@@ -60,6 +74,13 @@
       },
       currentValue (val) {
         this.$emit('input', val)
+      },
+      options: {
+        deep: true,
+        immediate: true,
+        handler (val) {
+          this.currentIspre = val.isPre
+        }
       }
     }
   }
@@ -288,7 +309,7 @@
     background-size: 100% 101.5%;
     background-position: 0 -5px;
     .el-dialog__body {
-      height: 90px;
+      /*height: 90px;*/
       padding: 40px 0 0 0;
     }
     .el-dialog__footer {

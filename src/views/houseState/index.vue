@@ -2,7 +2,7 @@
   <div class="box">
     <div class="main-wrap">
       <div class="house-title" >
-        <div class="center-wrap" style="">
+        <div class="center-wrap" >
         <span class="btn-default btn-left" @click="handleClickPrev(-15)" :class="{active: btnLeftActive}">
           <i class="el-icon-arrow-left icon-btn"></i>
           前15天
@@ -59,18 +59,25 @@
         </tbody>
       </table>
     </div>
+
+    <dyDialog
+      v-model="isShowDialog"
+      @changeIsPre="handleChangePre"
+      :formatTime="formatTime"
+      :options="dialogOptions"  />
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   import {DatePicker} from 'iview'
+  import dyDialog from '@/components/dy-dialog'
 
   export default {
     name: '',
     components: {
-      // dyDialog
-      DatePicker
+      DatePicker,
+      dyDialog
     },
     data() {
       return {
@@ -79,6 +86,12 @@
             return date && date.valueOf() < Date.now() - 86400000;
           }
         },
+        dialogOptions: {
+
+        },
+        isPre: true,  // 是否可以预定
+        isShowDialog: false, // 是否显示弹框
+        formatTime: "", // 传入弹框的日期
         btnLeftActive: false,
         currentDate: new Date(), // 当前选择的日期
         date: new Date(), // 今天的日期
@@ -100,7 +113,7 @@
         testData: {
           time: 1544683731, // unix时间戳
         },
-        hoseType: ['豪华大床房', '双标间', '豪华海景大床房', '豪华家庭房', '天字一号房']
+        houseType: ['豪华大床房', '双标间', '豪华海景大床房', '豪华家庭房', '天字一号房']
       }
     },
     methods: {
@@ -120,20 +133,24 @@
       },
       pickerChange (date) {
         let newDate = new Date(date)
+        this.toggleClass(newDate)
         /*用户选择日期的逻辑在这里写*/
         /*用户选择日期的逻辑在这里写*/
         /*用户选择日期的逻辑在这里写*/
         /*用户选择日期的逻辑在这里写*/
       },
-      handleClickNext (num) {
-        let oldDate = this.currentDate.getDate()
-        let newDate = this.currentDate.setDate(oldDate + num)
-        this.currentDate = new Date(newDate)
+      toggleClass (newDate) {
         if (newDate - this.date.getTime() >= 15 * 86400000) { // 大于15天
           this.btnLeftActive = true
         } else {
           this.btnLeftActive = false
         }
+      },
+      handleClickNext (num) {
+        let oldDate = this.currentDate.getDate()
+        let newDate = this.currentDate.setDate(oldDate + num)
+        this.currentDate = new Date(newDate)
+        this.toggleClass(newDate)
 
         /*用户点击后十五天的逻辑在这里写*/
         /*用户点击后十五天的逻辑在这里写*/
@@ -145,11 +162,7 @@
           let oldDate = this.currentDate.getDate()
           let newDate = this.currentDate.setDate(oldDate + num)
           this.currentDate = new Date(newDate)
-          if (newDate - this.date.getTime() >= 15 * 86400000) { // 大于15天
-            this.btnLeftActive = true
-          } else {
-            this.btnLeftActive = false
-          }
+          this.toggleClass(newDate)
 
           /*用户点击前十五天的逻辑在这里写*/
           /*用户点击前十五天的逻辑在这里写*/
@@ -161,8 +174,20 @@
       handleClick(e) {
         let target = e.target.dataset.col && e.target.dataset.row && e.target;
         if(target) {
-          console.log(target.dataset.col + '列');
-          console.log(target.dataset.row + '行');
+          let col = target.dataset.col;
+          let row = target.dataset.row;
+          let month = this.dateData.weekDate[col].month;
+          let date = this.dateData.weekDate[col].num;
+          console.log(col + '列');
+          console.log(row + '行');
+
+          this.formatTime = `${month}月-${date}日`;
+          // this.dialogOptions.houseType = this.houseData.houseType[row];
+          // this.dialogOptions.isPre = this.houseData.arr[row].arr[col].isPre
+          this.dialogOptions = this.houseData.arr[row].arr[col]
+          this.dialogOptions.col = col;
+          this.dialogOptions.row = row;
+          this.isShowDialog = true;
           // 单元格点击事件在这里写
           // 单元格点击事件在这里写
           // 单元格点击事件在这里写
@@ -170,6 +195,14 @@
           // 单元格点击事件在这里写
           // 单元格点击事件在这里写
         }
+      },
+      handleChangePre(obj) { // 改变是否可以预定
+        let row = obj.row;
+        let col = obj.col;
+        let isPre = obj.value;
+        console.log(obj);
+        this.houseData.arr[row].arr[col].isPre = isPre
+        this.houseDagta = {...this.houseData}
       },
       setLine () { //斜线设置
         let box = this.$refs.speCell;
@@ -203,7 +236,9 @@
         for(let i = 0; i < 15; i++){ // 获得15天的号数和星期几
           this.dateData.weekDate.push({
             day: this.week[minDate.getDay()], // 得到星期几
-            num: minDate.getDate() // 得到第几号
+            num: minDate.getDate(), // 得到第几号
+            month: minDate.getMonth() + 1, // 得到星期几
+            unix: minDate.getTime() // 得到Unix时间戳
           });
           if(i == 14){ // 得到最后一天的月份
             endMonth = minDate.getMonth() + 1;
